@@ -57,3 +57,6 @@ def uninstall():
                 uninstall_psservice(old_buildpath,old_image_version,"ps")
         if "mongodb" in ns:
                 uninstall_psservice(old_buildpath,old_image_version,"mongodb")
+
+print(Fore.BLUE+"\n Starting uninstall procedure \n")
+uninstall()
