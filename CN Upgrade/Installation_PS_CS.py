@@ -149,10 +149,11 @@ def common_service(path,new_image_version):
         print(Fore.RED+"\n FAILED TO INSTALL COMMON SERVICES \n")
         exit()
 
-
+########################Clear data from mnt folders #######################
 print(Fore.BLUE+"\n Clear data from mnt folders based on user input \n")
 cleardb = clear_db()
 
+########################Untar CNF file and nf images #######################
 print(Fore.BLUE+"\n Starting the unzip process for new package \n")
 untar = ("tar -xvf TRILLIUM_5GCN_CNF_REL_"+new_image_version+".tar.gz")
 exec_cmduntar(untar,path)
@@ -161,7 +162,7 @@ print(Fore.BLUE+"\n Copying the load.sh script to base path \n")
 copy_load(basepath,path)
 print(Fore.BLUE+"\n Loading the new images \n")
 load_fun(new_image_version,path)
-
+########################PS installation #######################
 print(Fore.BLUE+"\n Starting the Platform service installation \n")
 ps_ingress(cluster_ip,file_load_10,path,new_image_version)
 ps_el(cluster_ip,file_load_11,path,new_image_version)
