@@ -18,7 +18,10 @@ nef_pp = input_var.nef_pp
 #kubernetes_image_version = input_var.kubernetes_image_version
 #kubernetes_build_path = input_var.kubernetes_build_path
 nef = input_var.nef
-
+def date():
+    now = datetime.now() # Use now() to access the current date and time
+    print(Fore.YELLOW+"Current date and time is ", Fore.YELLOW+str(now))
+    
 def exec_cmd(cmd):
     # Execute in a sub-process and capture output.
     proc = subprocess.Popen(
@@ -68,3 +71,4 @@ print(Fore.BLUE+"\n Starting the image deletion process \n")
 delete = ("crictl images | grep "+old_image_version+"| awk '{print $3}' | xargs crictl rmi")
 image_delete = exec_cmd(delete)
 print(image_delete)
+date()
