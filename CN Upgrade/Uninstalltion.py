@@ -19,6 +19,14 @@ nef_pp = input_var.nef_pp
 #kubernetes_build_path = input_var.kubernetes_build_path
 nef = input_var.nef
 
+def exec_cmd(cmd):
+    # Execute in a sub-process and capture output.
+    proc = subprocess.Popen(
+        cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True
+    )
+    stdout, stderr = proc.communicate()
+
+    return stdout.decode("utf-8") + stderr.decode("utf-8")
 
 def uninstall():
         ns = exec_cmd("kubectl get ns")
@@ -56,3 +64,7 @@ def uninstall():
 date()
 print(Fore.BLUE+"\n Starting uninstall procedure \n")
 uninstall()
+print(Fore.BLUE+"\n Starting the image deletion process \n")
+delete = ("crictl images | grep "+old_image_version+"| awk '{print $3}' | xargs crictl rmi")
+image_delete = exec_cmd(delete)
+print(image_delete)
