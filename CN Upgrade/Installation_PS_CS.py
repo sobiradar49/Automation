@@ -34,6 +34,9 @@ file_load_13 = 'global-values.yaml'
 file_load_14 = 'cluster-config.yaml'
 file_load_16 = 'nef-1-values.yaml'
 
+def date():
+    now = datetime.now() # Use now() to access the current date and time
+    print(Fore.YELLOW+"Current date and time is ", Fore.YELLOW+str(now))
 
 def exec_cmd(cmd):
     # Execute in a sub-process and capture output.
@@ -148,7 +151,7 @@ def common_service(path,new_image_version):
     else:
         print(Fore.RED+"\n FAILED TO INSTALL COMMON SERVICES \n")
         exit()
-
+date()
 ########################Clear data from mnt folders #######################
 print(Fore.BLUE+"\n Clear data from mnt folders based on user input \n")
 cleardb = clear_db()
@@ -168,6 +171,7 @@ ps_ingress(cluster_ip,file_load_10,path,new_image_version)
 ps_el(cluster_ip,file_load_11,path,new_image_version)
 platform_services(path,new_image_version)
 
+date()
 
 
 ######################## CS Installation #######################
